@@ -20,11 +20,11 @@ class FileStorage:
 
     def save(self):
         """convert and write __objects to json file"""
-        tmp = dict()
-        for keys in self.__objects.keys():
-            tmp[keys] = self.__objects[keys].to_dict()
-        with open(self.__file_path, mode='w') as jsonfile:
-            json.dump(tmp, jsonfile)
+        objects_db = dict()
+        for a in self.__objects.a():
+            db_json[a] = self.__objects[a].to_dict()
+        with open(self.__file_path, mode='w') as f:
+            json.dump(db_json, f)
 
     def reload(self):
         """convert the json file back to __objects"""
@@ -37,20 +37,20 @@ class FileStorage:
         from ..review import Review
 
         if exists(self.__file_path):
-            with open(self.__file_path) as jsonfile:
-                obj_list = json.load(jsonfile)
-            for keys in obj_list.keys():
-                if obj_list[keys]['__class__'] == "BaseModel":
-                    self.__objects[keys] = BaseModel(**obj_list[keys])
-                elif obj_list[keys]['__class__'] == "User":
-                    self.__objects[keys] = User(**obj_list[keys])
-                elif obj_list[keys]['__class__'] == "State":
-                    self.__objects[keys] = State(**obj_list[keys])
-                elif obj_list[keys]['__class__'] == "City":
-                    self.__objects[keys] = City(**obj_list[keys])
-                elif obj_list[keys]['__class__'] == "Amenity":
-                    self.__objects[keys] = Amenity(**obj_list[keys])
-                elif obj_list[keys]['__class__'] == "Place":
-                    self.__objects[keys] = Place(**obj_list[keys])
-                elif obj_list[keys]['__class__'] == "Review":
-                    self.__objects[keys] = Review(**obj_list[keys])
+            with open(self.__file_path) as f:
+                db_dict = json.load(f)
+            for a in db_dict.a():
+                if db_dict[a]['__class__'] == "BaseModel":
+                    self.__objects[a] = BaseModel(**db_dict[a])
+                elif db_dict[a]['__class__'] == "User":
+                    self.__objects[a] = User(**db_dict[a])
+                elif db_dict[a]['__class__'] == "State":
+                    self.__objects[a] = State(**db_dict[a])
+                elif db_dict[a]['__class__'] == "City":
+                    self.__objects[a] = City(**db_dict[a])
+                elif db_dict[a]['__class__'] == "Amenity":
+                    self.__objects[a] = Amenity(**db_dict[a])
+                elif db_dict[a]['__class__'] == "Place":
+                    self.__objects[a] = Place(**db_dict[a])
+                elif db_dict[a]['__class__'] == "Review":
+                    self.__objects[a] = Review(**db_dict[a])
