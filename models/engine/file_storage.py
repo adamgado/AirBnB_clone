@@ -20,8 +20,8 @@ class FileStorage:
 
     def save(self):
         """convert and write __objects to json file"""
-        objects_db = dict()
-        for a in self.__objects.a():
+        db_json = dict()
+        for a in self.__objects.keys():
             db_json[a] = self.__objects[a].to_dict()
         with open(self.__file_path, mode='w') as f:
             json.dump(db_json, f)
@@ -39,7 +39,7 @@ class FileStorage:
         if exists(self.__file_path):
             with open(self.__file_path) as f:
                 db_dict = json.load(f)
-            for a in db_dict.a():
+            for a in db_dict.keys():
                 if db_dict[a]['__class__'] == "BaseModel":
                     self.__objects[a] = BaseModel(**db_dict[a])
                 elif db_dict[a]['__class__'] == "User":
