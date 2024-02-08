@@ -13,7 +13,7 @@ import uuid
 
 
 class TestBaseModel(unittest.TestCase):
-    """this will test the base model class"""
+    """tests for base model"""
 
     def test_class(self):
         """test if object is instance of BaseModel"""
