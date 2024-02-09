@@ -77,6 +77,21 @@ class HBNBCommand(cmd.Cmd):
                 del models.storage.all()[class_name + '.' + obj_id]
                 models.storage.save()
 
+    def do_all(self, arg):
+        """print string form of all objects"""
+        db_list = models.storage.all()
+        class_name = self.parseline(arg)[0]
+        if class_name is None:
+            for a in db_list:
+                print(str(db_list[a]))
+        elif class_name not in self.class_list:
+            print("** class doesn't exist **")
+        else:
+            obj_list = db_list.keys()
+            for b in obj_list:
+                if b.startswith(class_name):
+                    print([str(db_list[b])])
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
