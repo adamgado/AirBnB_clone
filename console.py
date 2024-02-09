@@ -59,6 +59,24 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print(found_obj)
 
+    def do_destroy(self, arg):
+        """delete object from storage"""
+        class_name = self.parseline(arg)[0]
+        obj_id = self.parseline(arg)[1]
+        if class_name is None:
+            print('** class name missing **')
+        elif class_name not in self.class_list:
+            print("** class doesn't exist **")
+        elif obj_id == '':
+            print('** instance id missing **')
+        else:
+            found_obj = models.storage.all().get(class_name + '.' + obj_id)
+            if found_obj is None:
+                print('** no instance found **')
+            else:
+                del models.storage.all()[class_name + '.' + obj_id]
+                models.storage.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
