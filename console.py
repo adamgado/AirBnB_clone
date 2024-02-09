@@ -30,9 +30,9 @@ class HBNBCommand(cmd.Cmd):
         """empty line + ENTER do nothing"""
         pass
 
-    def do_create(self, *args):
+    def do_create(self, arg):
         """create a new instance of class"""
-        class_name = args[0]
+        class_name = self.parseline(arg)[0]
         if class_name is None:
             print('** class name missing **')
         elif class_name not in self.class_list:
@@ -42,12 +42,10 @@ class HBNBCommand(cmd.Cmd):
             created.save()
             print(created.id)
 
-    def do_show(self, *args):
+    def do_show(self, arg):
         """print string form of object"""
-        class_name = args[0]
-        obj_id = ''
-        if len(args) > 1:
-            obj_id = args[1]
+        class_name = self.parseline(arg)[0]
+        obj_id = self.parseline(arg)[1]
         if class_name is None:
             print('** class name missing **')
         elif class_name not in self.class_list:
@@ -56,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
             print('** instance id missing **')
         else:
             found_obj = models.storage.all().get(class_name + '.' + obj_id)
-            if found_obj == '':
+            if found_obj is None:
                 print('** no instance found **')
             else:
                 print(found_obj)
