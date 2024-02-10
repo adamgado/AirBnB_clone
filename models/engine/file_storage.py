@@ -30,13 +30,13 @@ class FileStorage:
         db_json = dict()
         for a, b in self.__objects.items():
             db_json[a] = b.to_dict()
-        with open(self.__file_path, mode='w', encoding='utf-8') as f:
+        with open(self.__file_path, mode='w') as f:
             f.write(json.dumps(db_json))
 
     def reload(self):
         """convert the json file back to __objects"""
         if path.exists(self.__file_path):
-            with open(self.__file_path, mode='r', encoding='utf-8') as f:
+            with open(self.__file_path, mode='r') as f:
                 db_dict = json.loads(f.read())
                 for a, b in db_dict.items():
                     self.__objects[a] = eval(b['__class__'])(**b)
