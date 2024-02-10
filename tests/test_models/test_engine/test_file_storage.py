@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 """FileStorage unittests"""
-import sys
-sys.path.append('../../..')
 from datetime import datetime
 import json
 from models.amenity import Amenity

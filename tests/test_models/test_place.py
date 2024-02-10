@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 """Place unittest"""
-import sys
-sys.path.append('../..')
 from models.base_model import BaseModel
 from models.place import Place
 import unittest

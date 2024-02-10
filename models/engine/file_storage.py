@@ -16,14 +16,15 @@ class FileStorage:
 
     def new(self, obj):
         """add new object to the __objects dictionary"""
-        self.__objects[obj.__class__.__name__ + '.' + obj.id] = obj
+        class_name = obj.__class__.__name__
+        self.__objects["{}.{}".format(class_name, obj.id)] = obj
 
     def save(self):
         """convert and write __objects to json file"""
         db_json = dict()
         for a, b in self.__objects.items():
             db_json[a] = b.to_dict()
-        with open(self.__file_path, mode='w') as f:
+        with open(self.__file_path, "w") as f:
             f.write(json.dumps(db_json))
 
     def reload(self):
@@ -40,4 +41,4 @@ class FileStorage:
             with open(self.__file_path, mode='r') as f:
                 db_dict = json.loads(f)
                 for a, b in db_dict.items():
-                    self.__objects[a] = eval('__class__')(**b)
+                    self.__objects[a] = eval(b["__class__"])(**b)
