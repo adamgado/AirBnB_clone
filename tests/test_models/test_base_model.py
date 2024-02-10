@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """Unittest for BaseModel"""
+import sys
+sys.path.append('../..')
 from datetime import datetime
 from models.base_model import BaseModel
 from models.city import City

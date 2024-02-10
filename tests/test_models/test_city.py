@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """City unittest"""
+import sys
+sys.path.append('../..')
 from models.base_model import BaseModel
 from models.city import City
 import unittest
