@@ -37,6 +37,6 @@ class FileStorage:
         """convert the json file back to __objects"""
         if path.exists(self.__file_path):
             with open(self.__file_path, mode='r') as f:
-                db_dict = json.loads(f.read())
+                db_dict = json.loads(f)
                 for a, b in db_dict.items():
                     self.__objects[a] = eval(b['__class__'])(**b)
