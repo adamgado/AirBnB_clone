@@ -21,10 +21,10 @@ class FileStorage:
     def save(self):
         """convert and write __objects to json file"""
         db_json = dict()
-        for a in self.__objects.keys():
-            db_json[a] = self.__objects[a].to_dict()
-        with open(self.__file_path, mode='w') as f:
-            json.dump(db_json, f)
+        for a, b in self.__objects.items():
+            db_json[a] = b.to_dict()
+        with open(self.__file_path, mode='w', encoding='utf-8') as f:
+            f.write(json.dumps(db_json))
 
     def reload(self):
         """convert the json file back to __objects"""
@@ -36,21 +36,8 @@ class FileStorage:
         from ..place import Place
         from ..review import Review
 
-        if exists(self.__file_path):
-            with open(self.__file_path) as f:
-                db_dict = json.load(f)
-            for a in db_dict.keys():
-                if db_dict[a]['__class__'] == "BaseModel":
-                    self.__objects[a] = BaseModel(**db_dict[a])
-                elif db_dict[a]['__class__'] == "User":
-                    self.__objects[a] = User(**db_dict[a])
-                elif db_dict[a]['__class__'] == "State":
-                    self.__objects[a] = State(**db_dict[a])
-                elif db_dict[a]['__class__'] == "City":
-                    self.__objects[a] = City(**db_dict[a])
-                elif db_dict[a]['__class__'] == "Amenity":
-                    self.__objects[a] = Amenity(**db_dict[a])
-                elif db_dict[a]['__class__'] == "Place":
-                    self.__objects[a] = Place(**db_dict[a])
-                elif db_dict[a]['__class__'] == "Review":
-                    self.__objects[a] = Review(**db_dict[a])
+        if path.exists(self.__file_path):
+            with open(self.__file_path, mode='r', encoding='utf-8') as f:
+                json_dict = json.loads(f.read())
+                for a, b in json_dict.items():
+                    self.__objects[a] = eval(b['__class__'])(**b)
