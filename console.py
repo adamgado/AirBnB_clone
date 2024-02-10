@@ -121,6 +121,7 @@ class HBNBCommand(cmd.Cmd):
                 print('** value missing **')
             else:
                 setattr(found_obj, attr_name, attr_value)
+                setattr(found_obj, 'updated_at', datetime.now())
                 found_obj.save()
 
 
