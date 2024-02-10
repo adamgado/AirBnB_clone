@@ -40,4 +40,4 @@ class FileStorage:
             with open(self.__file_path, mode='r') as f:
                 db_dict = json.loads(f)
                 for a, b in db_dict.items():
-                    self.__objects[a] = eval(b['__class__'])(**b)
+                    self.__objects[a] = eval(['__class__'])(**b)
