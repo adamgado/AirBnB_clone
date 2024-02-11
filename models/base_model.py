@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/bin/usr/python3
 """basemodel class"""
 from datetime import datetime
 from models import storage
