@@ -1,41 +1,42 @@
-#!/usr/bin/python3
-"""basemodel class"""
+#!/bin/usr/python3
+"""file containing basemodel class"""
 from datetime import datetime
 from models import storage
 import uuid
 
 
 class BaseModel():
-    """Class base model"""
+    """Class BaseModel, base model for AirBnB Clone"""
 
     def __init__(self, *args, **kwargs):
-        """initialize basemodel class object"""
-        if kwargs:
-            for a, b in kwargs.items():
-                if a in ('created_at', 'updated_at'):
-                    b = datetime.strptime(b, '%Y-%m-%dT%H:%M:%S.%f')
-                if a != '__class__':
-                    setattr(self, a, b)
-        else:
+        """initializes BaseModel"""
+        if kwargs is None or len(kwargs) == 0:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
-            self.updated_at = self.created_at
+            self.updated_at = datetime.now()
             storage.new(self)
+        else:
+            for key, value in kwargs.items():
+                if key == "created_at" or key == "updated_at":
+                    time = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    setattr(self, key, time)
+                elif key != "__class__":
+                    setattr(self, key, value)
 
     def __str__(self):
-        """return str representation of object"""
-        class_name = self.__class__.__name__
-        return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
+        """class str method"""
+        classname = self.__class__.__name__
+        return "[{}] ({}) {}".format(classname, self.id, self.__dict__)
 
     def save(self):
-        """update updated_at"""
+        """updates updated_at with current time"""
         self.updated_at = datetime.now()
         storage.save()
 
     def to_dict(self):
-        """return dictionary representation of object"""
-        d = dict(self.__dict__)
-        d['__class__'] = self.__class__.__name__
-        d['created_at'] = datetime.isoformat(self.created_at)
-        d['updated_at'] = datetime.isoformat(self.updated_at)
-        return d
+        """creates a dictionary of BaseModel"""
+        self_dictionary = dict(self.__dict__)
+        self_dictionary['__class__'] = self.__class__.__name__
+        self_dictionary['created_at'] = datetime.isoformat(self.created_at)
+        self_dictionary['updated_at'] = datetime.isoformat(self.updated_at)
+        return self_dictionary
