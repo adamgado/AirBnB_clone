@@ -95,6 +95,7 @@ class HBNBCommand(cmd.Cmd):
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     def do_update(self, arg):
         """update object attributes"""
@@ -128,6 +129,8 @@ class HBNBCommand(cmd.Cmd):
                 found_obj.save()
 
 >>>>>>> parent of 2ea67b9 (console 0.7.1, more fixes + basemodel fix)
+=======
+>>>>>>> parent of 56755d6 (console 0.6, update)
 =======
 >>>>>>> parent of 56755d6 (console 0.6, update)
 =======
