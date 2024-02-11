@@ -1,7 +1,14 @@
 #!/usr/bin/python3
 """FileStorage class"""
 import json
-from os.path import exists
+from os import path
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class FileStorage:
@@ -28,15 +35,7 @@ class FileStorage:
 
     def reload(self):
         """convert the json file back to __objects"""
-        from ..base_model import BaseModel
-        from ..user import User
-        from ..state import State
-        from ..city import City
-        from ..amenity import Amenity
-        from ..place import Place
-        from ..review import Review
-
-        if exists(self.__file_path):
+        if path.exists(self.__file_path):
             with open(self.__file_path, mode='r') as f:
                 db_dict = json.loads(f)
                 for a, b in db_dict.items():
