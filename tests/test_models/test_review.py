@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """Review unittest"""
+import sys
+sys.path.append('../..')
 from models.base_model import BaseModel
 from models.review import Review
 import unittest

@@ -34,7 +34,7 @@ class BaseModel():
 
     def to_dict(self):
         """return dictionary representation of object"""
-        d = self.__dict__
+        d = dict(self.__dict__)
         d['__class__'] = self.__class__.__name__
         d['created_at'] = datetime.isoformat(self.created_at)
         d['updated_at'] = datetime.isoformat(self.updated_at)

@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """State unittest"""
+import sys
+sys.path.append('../..')
 from models.base_model import BaseModel
 from models.state import State
 import unittest
