@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 """Amenity unittest"""
-import sys
-sys.path.append('../..')
 from models.base_model import BaseModel
 from models.amenity import Amenity
 import unittest

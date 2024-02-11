@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 """User unittest"""
-import sys
-sys.path.append('../..')
 from models.base_model import BaseModel
 from models.user import User
 import unittest
