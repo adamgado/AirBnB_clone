@@ -92,12 +92,6 @@ class HBNBCommand(cmd.Cmd):
                 if b.startswith(class_name):
                     print([str(db_list[b])])
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     def do_update(self, arg):
         """update object attributes"""
         arguments = shlex.split(arg)
@@ -129,15 +123,6 @@ class HBNBCommand(cmd.Cmd):
                 setattr(found_obj, 'updated_at', datetime.now())
                 found_obj.save()
 
->>>>>>> parent of 2ea67b9 (console 0.7.1, more fixes + basemodel fix)
-=======
->>>>>>> parent of 56755d6 (console 0.6, update)
-=======
->>>>>>> parent of 56755d6 (console 0.6, update)
-=======
->>>>>>> parent of 56755d6 (console 0.6, update)
-=======
->>>>>>> parent of 56755d6 (console 0.6, update)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
