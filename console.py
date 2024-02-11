@@ -92,6 +92,40 @@ class HBNBCommand(cmd.Cmd):
                 if b.startswith(class_name):
                     print([str(db_list[b])])
 
+<<<<<<< HEAD
+=======
+    def do_update(self, arg):
+        """update object attributes"""
+        arguments = shlex.split(arg)
+        if len(arguments) >= 1:
+            class_name = arguments[0]
+        if len(arguments) >= 2:
+            obj_id = arguments[1]
+        if len(arguments) >= 3:
+            attr_name = arguments[2]
+        if len(arguments) >= 4:
+            attr_value = arguments[3]
+        if len(arguments) == 0:
+            print('** class name missing **')
+        elif class_name not in self.class_list:
+            print("** class doesn't exist **")
+        elif len(arguments) == 1:
+            print('** instance id missing **')
+        else:
+            obj_key = class_name + '.' + obj_id
+            found_obj = models.storage.all().get(obj_key)
+            if found_obj is None:
+                print('** no instance found **')
+            elif len(arguments) == 2:
+                print('** attribute name missing **')
+            elif len(arguments) == 3:
+                print('** value missing **')
+            else:
+                setattr(found_obj, attr_name, attr_value)
+                setattr(found_obj, 'updated_at', datetime.now())
+                found_obj.save()
+
+>>>>>>> parent of 2ea67b9 (console 0.7.1, more fixes + basemodel fix)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
