@@ -1,3 +1,4 @@
+/* Places style*/
 .places {display: flex; flex-direction: column; padding-left: 30px;}
 .places h1 {font-size: 30px;}
 .places_title {padding-top: 30px; margin-bottom: -25px;}
